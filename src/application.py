@@ -38,8 +38,9 @@ def get_student_by_uni(uni):
     else:
         rsp = Response("NOT FOUND", status=404, content_type="text/plain")
 
+    print(result)
     return rsp
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5011)
+    app.run(host="0.0.0.0", port=5011, debug=True)
 
