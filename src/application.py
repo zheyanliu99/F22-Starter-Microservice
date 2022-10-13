@@ -10,7 +10,8 @@ app = Flask(__name__,
             static_folder='static/class-ui/',
             template_folder='web/templates')
 
-CORS(app)
+# CORS(app)
+cors = CORS(app, resources={r'/api/*':{'origins':'*'}})
 
 
 @app.get("/api/health")
@@ -39,6 +40,20 @@ def get_student_by_uni(uni):
         rsp = Response("NOT FOUND", status=404, content_type="text/plain")
 
     print(result)
+    return rsp
+
+
+@app.route("/api/user/login", methods=["POST"])
+def login():
+    rsp = Response("NOT FOUND", status=404, content_type="text/plain")
+    print('AAAAAA')
+    print(request.form)
+    if request.method == 'POST':
+        if request.form['email'] == 'test@test.com' and request.form['password'] == '123456':
+            result = {'success':True, 'message':'login successful','user_id':'777'}
+            rsp = Response(json.dumps(result), status=200, content_type="application.json")
+        else: 
+            rsp = Response("NOT FOUND", status=404, content_type="text/plain")
     return rsp
 
 if __name__ == "__main__":
