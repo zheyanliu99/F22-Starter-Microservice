@@ -47,9 +47,10 @@ def get_student_by_uni(uni):
 def login():
     rsp = Response("NOT FOUND", status=404, content_type="text/plain")
     print('AAAAAA')
-    print(request.form)
+    print(request.get_json())
+    # print(request.form)
     if request.method == 'POST':
-        if request.form['email'] == 'test@test.com' and request.form['password'] == '123456':
+        if request.get_json()['email'] == 'test@test.com' and request.get_json()['password'] == '123456':
             result = {'success':True, 'message':'login successful','user_id':'777'}
             rsp = Response(json.dumps(result), status=200, content_type="application.json")
         else: 
